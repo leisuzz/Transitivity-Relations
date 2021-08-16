@@ -1,0 +1,29 @@
+def dig(m):
+  matrix = []
+  for s in m:
+    matrix.append([int(x) for x in s.replace('(', '').replace(')', '').split(',')])
+  return matrix
+
+def check(x):
+  trans =[]
+  for i in range(len(x)):
+    for j in range(len(x)):
+      for k in range(len(x)):
+        if x[i][j] == 1 and x[j][k] == 1 and x[i][k] !=1 and i != k:
+          trans.append("(%d,%d)" % (i, k))
+          x[i][k] = 1
+  if len(trans) == 0:
+    return 'transitive'
+  else:
+    trans = sorted(trans)
+    return '-'.join(trans)
+
+def TransitivityRelations(strArr):
+
+  new_str = dig(strArr)
+  result = check(new_str)
+  # code goes here
+  return result
+
+# keep this function call here 
+print TransitivityRelations(raw_input())
